@@ -28,6 +28,7 @@ class HomeController extends Controller
     public function index()
     {
         $posts = DB::table('users')->leftjoin('posts', 'users.id', '=', 'posts.author')->paginate(10);
+
         return view('home', ['posts' => $posts]);
     }
 
@@ -44,18 +45,22 @@ class HomeController extends Controller
         return redirect()->route('home')->with('success', 'Post has been successfully added!');
     }
 
-    public function getPost($id){
-        $post = Post::find($id);
+    public function getPost($slug){
+        //$post = Post::find($id);
+        $post = Post::where("slug",$slug)->first();   //uses string unlike find that uses integer
+//        dd($post);
         return view('post/post_detail', ['post' => $post]);
     }
 
     public function editPost($id) {
         $post = Post::find($id);
+        //$post = Post::where("slug",$slug)->first();
         return view('post/edit_post', ['post' => $post]);
     }
 
     public function updatePost(Request $request, $id) {
         $post = Post::find($id);
+        //$post = Post::where("slug",$slug)->first();
         $post->title = $request->title;
         $post->description = $request->description;
         $post->save();
@@ -64,6 +69,7 @@ class HomeController extends Controller
 
     public function deletePost($id) {
         $post = Post::find($id);
+        //$post = Post::where("slug",$slug)->first();
         $post->delete();
         return redirect()->route('home')->with('success', 'Post has been deleted successfully!');
     }

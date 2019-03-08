@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', 'PostController@getIndex')->name('index');
+//Route::get('/', 'PostController@getIndex')->name('index');
 
 Auth::routes();
 

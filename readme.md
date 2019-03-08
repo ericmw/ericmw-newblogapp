@@ -1,4 +1,3 @@
-[![Build Status](https://travis-ci.com/ericmw/ericmw-newblogapp.svg?branch=master)](https://travis-ci.com/ericmw/ericmw-newblogapp)
 
 # Laravel blog application
 
