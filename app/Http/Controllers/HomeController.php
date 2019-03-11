@@ -7,6 +7,9 @@ use App\Post;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
+
 
 class HomeController extends Controller
 {
@@ -37,10 +40,19 @@ class HomeController extends Controller
     }
 
     public function createPost(Request $request){
+        $postimage = $request->file('blogimage');
+        $extension = $postimage->getClientOriginalExtension();
+        Storage::disk('public')->put($postimage->getFilename().'.'.$extension,  File::get($postimage));
         $post = Post::create(array(
-            'title' => Input::get('title'),
-            'description' => Input::get('description'),
-            'author' => Auth::user()->id
+                        
+            'image'=>Input::get('image'),
+            'title'=>Input::get('title'),
+            'description'=>Input::get('description'),
+            'author'=>Auth::user()->id,
+            'mime' => $postimage->getClientMimeType(),
+            'original_filename' => $postimage->getClientOriginalName(),
+            'filename' => $postimage->getFilename().'.'.$extension,
+
         ));
         return redirect()->route('home')->with('success', 'Post has been successfully added!');
     }

@@ -19,9 +19,14 @@
             <main role="main" class="col-sm-9 ml-sm-auto col-md-10 pt-3">
                 <h1>Create Post</h1>
                 <div class="col-md-4">
-                    <form method="post" action="{{ route('post.form') }}">
+                    <form method="post" action="{{ route('post.form')}}" enctype="multipart/form-data">
                         {{ csrf_field() }}
                         <div class="form-group">
+                            <label for="images">Image</label>
+                            <input type="file" class="form-control" id="blogimage" name="blogimage">
+                                   
+                        </div>
+                        <div>
                             <label for="name">Title</label>
                             <input type="text" class="form-control" id="id_title" name="title"
                                    aria-describedby="title" placeholder="Enter title">
@@ -32,6 +37,7 @@
                         </div>
                         <button type="submit" class="btn btn-primary">Create post</button>
                     </form>
+
                 </div>
             </main>
         </div>

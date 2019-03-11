@@ -18,6 +18,7 @@
 
             <main role="main" class="col-sm-9 ml-sm-auto col-md-10 pt-3">
                 <h1>{{ $post->title }}</h1>
+                <img class="img-responsive" src="{{url('images/'.$post->filename)}}" alt="{{$post->filename}}" width="auto" height="auto">
                 <div class="col-sm-8 blog-main">
                     <p>{{ $post->description }}</p>
                     <a href="{{ route('post.edit', ['id' => $post->id]) }}">
